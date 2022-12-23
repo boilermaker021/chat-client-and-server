@@ -1,13 +1,19 @@
+CC=gcc
+
+
 server: server.c argparse
-	gcc server.c -o server
+	$(CC) server.c -o server
 
 client: client.c argparse
-	gcc client.c -o client
+	$(CC) client.c -o client
+
+argparse-test: argparse
+	$(CC) src/argparse-test.c build/dep/argparse.o -o build/out/argparse-test
 
 argparse: lib/argparse/argparse.c build-folder
-	gcc -c lib/argparse/argparse.c -o build/argparse.o
+	$(CC) -c lib/argparse/argparse.c -o build/dep/argparse.o
 
 build-folder:
-	mkdir -p build/dep build/out
+	mkdir -p build/dep build/out build/obj
 
 all: server client
